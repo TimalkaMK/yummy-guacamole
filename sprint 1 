@@ -1,0 +1,9 @@
+create a project on android studio * comment on the spec i.e Jellybean blah blah 
+
+created activities and layouts  * add more about this when doing CI360
+
+implemented side menu bar 
+used menu template provided in the start of project 
+able to navigate to the activity from the menu bar - using intent
+
+able to exit and go back to previous activity * double check
