@@ -1,0 +1,23 @@
+Talked with Andrew about worries of getting app done, set up a meeting on thursday to show progress
+
+android developer: fragments, creating fragments, building a dynamic UI with fragments
+
+creating dynamic UI ,nested activities:
+
+declared fragments in home activity layout file 
+created DailyFragment class with fragment factory methods , list 
+created CalendarFragment class with factory methods and callback events 
+
+using import android.support.v4.app.FragmentActivity - in home activity 
+using import import android.support.v4.app.Fragment - in fragments
+
+realised this was not what I wanted!
+
+derek banas: views 
+
+Created two views in activity_home.xml file :
+list view and calendar view 
+
+Not sure if I should give them separate linear layouts.
+
+make a clickable listview
