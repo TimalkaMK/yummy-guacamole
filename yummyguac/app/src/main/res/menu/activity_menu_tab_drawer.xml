@@ -3,16 +3,12 @@
 
 
         <item android:id="@+id/home"
-              android:icon="@android:drawable/ic_menu_camera"
-              android:title="Home" />
+              android:title="Home"/>
         <item android:id="@+id/produce"
-              android:icon="@android:drawable/ic_menu_gallery"
               android:title="Produce" />
         <item android:id="@+id/meals"
-              android:icon="@android:drawable/ic_menu_slideshow"
               android:title="Meals" />
         <item android:id="@+id/shoppinglist"
-              android:icon="@android:drawable/ic_menu_manage"
               android:title="Shopping List" />
 
 

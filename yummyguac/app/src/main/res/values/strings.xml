@@ -1,8 +1,20 @@
 <resources>
     <string name="app_name">yummyguac</string>
+    <string name="home_screen">Home</string>
+    <string name="ingredients_screen">Ingredients</string>
+    <string name="kitchen_screen">Kitchen</string>
+    <string name="meals_screen">Meals</string>
+    <string name="meals_list_screen">Meal List</string>
+    <string name="menu_tab_screen">Menu</string>
+    <string name="planning_screen">Planning</string>
+    <string name="produce_screen">Produce</string>
+    <string name="shopping_list_screen">Shopping List</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

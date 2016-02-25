@@ -20,4 +20,14 @@ list view and calendar view
 
 Not sure if I should give them separate linear layouts.
 
-make a clickable listview
+created a customised layout and adapter for list view
+
+remove the icons(pics) from navigation bar
+
+Removed home activity and xml file -> home page is now content_menu_tab.xml and MenuTabActivity
+
+Next: expandable list view and list view corresponding to date.
+
+
+
+

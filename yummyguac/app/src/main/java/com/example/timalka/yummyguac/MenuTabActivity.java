@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 public class MenuTabActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,23 +26,16 @@ public class MenuTabActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        weeklyListView();
     }
 
     @Override
@@ -81,12 +76,7 @@ public class MenuTabActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.home) {
-            // Handle the camera action
-            Intent openHome = new Intent(this,HomeActivity.class);
-           startActivity(openHome);
-
-        } else if (id == R.id.produce) {
+        if (id == R.id.produce) {
 
             Intent openProduce = new Intent(this,KitchenActivity.class);
             startActivity(openProduce);
@@ -105,5 +95,24 @@ public class MenuTabActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    // weekly list view
+    private void weeklyListView() {
+
+        // change this to the current week from calendar
+        String[] list = { "Today", "Tomorrow" ,"Wednesday", "Thursday", "Friday",
+                "Saturday", "Sunday"};
+
+        //convert the array into list view items
+        ListAdapter adapter = new CustomAdapter1(this,list);
+
+        //Getting the list view from layout file
+        ListView listView = (ListView) findViewById(R.id.weeks_listview);
+
+        //set the data for list view
+        listView.setAdapter(adapter);
+
     }
 }
