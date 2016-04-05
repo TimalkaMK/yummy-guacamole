@@ -20,10 +20,6 @@
         </activity>
         <activity android:name=".PlanningActivity"
             android:label="@string/planning_screen"/>
-        <activity android:name=".KitchenActivity"
-            android:label="@string/kitchen_screen"/>
-        <activity android:name=".ProduceListActivity"
-            android:label="@string/produce_screen"/>
         <activity android:name=".MealsActivity"
             android:label="@string/meals_screen"/>
         <activity android:name=".MealsListActivity"

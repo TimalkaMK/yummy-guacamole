@@ -31,7 +31,7 @@ class CustomAdapter1 extends ArrayAdapter<String> {
         String singleItem = getItem(position);
 
         //Retrieve text view from list1.xml
-        TextView text = (TextView) customView.findViewById(R.id.weekstextview);
+        TextView text = (TextView) customView.findViewById(R.id.producelist);
 
         //set the text layout for each item
         text.setText(singleItem);

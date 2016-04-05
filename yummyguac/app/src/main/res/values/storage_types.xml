@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <resources>
+    
+    <string-array name="storage_types">
+        <item>Fridge</item>
+        <item>Freezer</item>
+        <item>Cupboard</item>
+        <item>Condiments</item>
+        <item>Spices</item>
+        <item>Herbs</item>
+    </string-array>
+</resources>
