@@ -1,0 +1,48 @@
+Thinking about ways to integrate the produce list into the home page ...
+
+**each item in the kitchen produce activity will have an id so that it can go on the main page?**
+
+created the kitchen activity page - need to make clickable to go to the produce list 
+still using same custom adapter as the one for list view in homepage - might change this later
+
+Re-thinking homepage...
+
+Changed the list to just one item = today - need to make it drop down or expand with today's meal plan (**like guake
+and a cool programming font like a secret mission?**)
+
+another list view in homepage with produce list 
+
+**Maybe have a designated background colour for the different storage types in homepage rather than explicitly writing
+the storage type. - write this in the help secton? Produce will be coupled according to storage type **
+
+thinking of a potential user test ...
+
+**have a pop up after the dates on calendar has been selected to move to planning
+
+carrot ios weather app - swipe up from bottom to reveal more data
+
+utilise swipe up and down to show today's meals and list of kitchen produce 
+
+make able to update the produce list and today's meals 
+
+main page show updateable shopping list , calendar for planning 
+
+swipe to the left to show my meals with drop down of ingredients that you can edit 
+
+**
+
+custom sliding drawer - newbostonvideo - deprecated :(
+
+implemented umano android sliding up panel library -yay!
+
+Trying to make the panel scrollable - very hard to find how to do it , was looking at umano issues on github
+finally found what I needed to implement!!
+
+now having trouble deciding how to make home-page asthetically pleasing -> calendar on homepage but need to 
+decided what to do with today's meals , shopping list and meals
+
+Ultimate goal:
+Changing the list view on the homepage to accomodate the produce list - populate the list with colours and quanitities
+
+
+

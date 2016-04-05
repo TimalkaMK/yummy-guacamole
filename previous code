@@ -1,0 +1,92 @@
+code:
+
+  <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:fillViewport="true"
+        android:id="@+id/scrolling">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:id="@+id/producelist"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+ 
+ 
+    private void scrolling(){
+
+       View scrollview = (View) findViewById(R.id.scrolling);
+
+        SlidingUpPanelLayout layout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+
+        layout.setDragView(scrollview);
+
+    }
+    
+ public void showList(){
+        String items = dbHandler.showProduceList();
+        produceList.setText(items);
+        input.setText("");
+  }
+  
+     public Cursor showProduceList(){
+
+        String produces = "";
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_PRODUCE + " WHERE 1";
+
+        //POINTER
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        //extract the product name from table and puts into produces string with new line
+        while (!cursor.isAfterLast()){
+
+            if (cursor.getString(cursor.getColumnIndex("producename")) != null){
+
+                produces += cursor.getString(cursor.getColumnIndex("producename"));
+                produces += "\n";
+            }
+            cursor.moveToNext();
+        }
+        db.close();
+
+        return cursor;
+    }
+
+
+
+ <Spinner
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/input"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/storage"></Spinner>
+            <Spinner
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/input"
+                android:layout_alignParentRight="true"
+                android:id="@+id/percentage"></Spinner>
+
+    <Spinner
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/input"
+                android:id="@+id/storage"
+                android:layout_alignLeft="@+id/percentage"></Spinner>
+            <Spinner
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:id="@+id/percentage"
+                android:layout_below="@+id/input"
+                android:layout_alignRight="@+id/storage"></Spinner>

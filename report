@@ -2,12 +2,19 @@ UML
 Use cases
 Class diagrams
 
+using intellij not eclipse
+
 Issues during the process:
 calendar on home activity
+sliding drawers
 
 Will they know if food is finished or expired?
 How will it work for a family?
 
-finding out about layouts and the different views 
+finding out about layouts and the different views incl. calendar view
 
 list adapters
+
+sliding drawers - deprecated :(
+
+learning how to add an external library to gradle - umano sliding up panel

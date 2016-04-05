@@ -1,0 +1,66 @@
+Implementing a '+' button to open a pop up activity to add an item to produce list.
+
+using kitchen activity as the criteria pop up window for each produce - removing what I have done so far i.e the 
+grid view which makes things harder for user. (N)
+
+https://www.youtube.com/watch?v=fn5OlqQuOCk
+
+changed the kitchen activty to popupWindow activity:
+altered the size of the popup box 
+
+connected the activity with the button in main 
+
+created a custom theme in styles to make the background of popup translucent
+
+*need to make the database to add to the list of produce*
+
+created a save button in popup layout file called kitchenActivity
+
+added an edit text view for user input
+
+created a produce class with produce id and produce name to start off with - going add the produce storage and 
+produce percentage later...
+
+created a dbhandler class to add and print the produce list when user inputs 
+
+remember to output the list onto the menutab layout not the popup window layout !
+
+https://thenewboston.com/forum/topic.php?id=3767
+
+decided to keep the add function on the slidinglayout instead of creating a pop up
+
+removed the popup activity and connected the dbhandler, layout file and main.java together to display produce when 
+added.
+
+now need to add the percentage and storage type 
+might have to use a custom list view , spinner on percentage and storage remains 
+
+ 
+ How is it going to work? gah!
+ 
+ **auto add a product with 0% use to list when bought from shopping list 
+ 
+ product name -> 
+ 
+ product storage -> can be useful to categorise the shopping list 
+ 
+ product percentage -> auto deduct when user uses for a meal
+ 
+ colours used for storage -> colour code the list 
+ 
+ when the percentage is 50% make amber or when 100% make red 
+ 
+ 
+ Next steps:
+ 
+ Layout -
+ 
+ implement percentage and storage spinners 
+ 
+ Main -
+ 
+ connect the layout and database for percentage and storage with colours 
+ 
+ database -
+ 
+ implement the percentage and storage (with options)

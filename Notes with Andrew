@@ -1,0 +1,16 @@
+After sprint 2:-
+calendar view : icon(knife and fork) to show if you have planned a meal on that day 
+
+top list view: change to current produce overview (fragment?)
+			   colours to show how much of produce is used up 
+			   
+
+After each week or day that meals have been planned :
+
+colours for each produce will automatically change according to the nd that the meals have been made for 
+- deduce the quantity - less work for user
+But if meals have not been prepared on that particular day then user can tell process to keep colour ?
+could say if you haven't had a meal so that produce remains 
+
+
+Aiden was talking about model view controller 

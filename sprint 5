@@ -1,0 +1,19 @@
+*change layout to list view for items* - done!
+- create custom layout for the listview 
+
+https://developer.android.com/guide/topics/ui/layout/relative.html
+
+https://www.youtube.com/watch?v=c-7sW6UJHw0
+
+changed the showProduceList method is myDBHandler from String to Cursor.
+
+made the list 'adder' a relative layout 
+
+Make spinner ui and add to database 
+
+1. storage spinner -> reference to colour code for each item in the list
+make a spinner with storage types and make the colour of items change that storage type.
+
+percentage spinner -> used to decrement value when used for a meal , remains stagnant otherwise 
+
+created drop down spinner for storage spinner , need to customise and connect with db
