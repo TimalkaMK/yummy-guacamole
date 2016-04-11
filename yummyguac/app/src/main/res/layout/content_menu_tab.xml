@@ -21,21 +21,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:textSize="16sp"
-        android:gravity="center|top"
-        android:text="Today's meals ..."
-        android:paddingBottom="40dp"/>
-
     <CalendarView
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:paddingBottom="40dp"
         android:id="@+id/calendarview">
-
     </CalendarView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="190dp"
+            android:layout_height="70dp"
+            android:id="@+id/shopping"
+            android:text="Shopping list"
+            android:clickable="true"
+            android:onClick="shoppingButtonClicked" />
+
+        <Button
+            android:layout_width="190dp"
+            android:layout_height="70dp"
+            android:id="@+id/meals"
+            android:text="Meals"
+            android:onClick="mealsButtonClicked"
+            android:clickable="true" />
+    </LinearLayout>
 
 </LinearLayout>
 
@@ -72,23 +85,25 @@
             android:layout_width="fill_parent"
             android:layout_height="400dp">
 
+            <Spinner
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/storage"></Spinner>
+
             <EditText
                 android:layout_width="290dp"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/input"/>
-            <Spinner
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/input"
-                android:id="@+id/storage"></Spinner>
+                android:id="@+id/input"
+                android:layout_below="@+id/storage"/>
 
             <Button
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:text="Add"
                 android:layout_centerInParent="true"
-                android:layout_below="@+id/storage"
+                android:layout_below="@+id/input"
                 android:id="@+id/save"
                 android:clickable="true"
                 android:onClick="saveButtonClicked" />

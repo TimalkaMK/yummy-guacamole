@@ -2,6 +2,7 @@ package com.example.timalka.yummyguac;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,32 +42,21 @@ public class MenuTabActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_tab);
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);*/
-        //fridgeListView();
         scrolling();
-
         //input,output and interacting with database handler
         input = (EditText) findViewById(R.id.input);
        // storage = (Spinner) findViewById(R.id.storage);
        // percentage = (Spinner) findViewById(R.id.percentage);
         dbHandler = new MyDBHandler(this,null,null,1);
 
+        storage = (Spinner) findViewById(R.id.storage);
+
         showList();
 
+        listItemLongClick();
+
         createstorageSpinner();
-
-        addListenertoStorageSpinner();
-
     }
 
     @Override
@@ -137,21 +128,9 @@ public class MenuTabActivity extends AppCompatActivity
         layout.setDragView(scrollview);
    }
 
-   /* private void fridgeListView() {
-
-        String[] list = {" Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-
-        ListAdapter adapter = new CustomAdapter1(this, list);
-
-        ListView listView = (ListView) findViewById(R.id.list);
-
-        listView.setAdapter(adapter);
-
-    }*/
-
     //saving the produce to the database when clicking save
     public void saveButtonClicked(View view){
-        ProduceList item = new ProduceList(input.getText().toString());
+        ProduceList item = new ProduceList(input.getText().toString(), storage.getSelectedItem().toString());
         dbHandler.addProduce(item);
         showList();
     }
@@ -161,11 +140,11 @@ public class MenuTabActivity extends AppCompatActivity
         Cursor items = dbHandler.showProduceList();
 
         //map the data to the textview
-        String[] fromProduceName = new String[]{MyDBHandler.COLUMN_PRODUCENAME};
-        int[] toViewItem = new int[] {R.id.producelist};
+        String[] fromProduceName = new String[]{MyDBHandler.KEY_PRODUCENAME , MyDBHandler.KEY_STORAGETYPE};
+        int[] toViewItem = new int[] {R.id.producelist,R.id.storagelist};
 
         //adapting the data to the listview
-        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,R.layout.list1,items,fromProduceName,toViewItem,0);
+        final SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,R.layout.list1,items,fromProduceName,toViewItem,0);
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(cursorAdapter);
 
@@ -175,16 +154,50 @@ public class MenuTabActivity extends AppCompatActivity
 
     public void createstorageSpinner(){
 
-        Spinner storage = (Spinner) findViewById(R.id.storage);
         ArrayAdapter<CharSequence> storageArrayAdapter = ArrayAdapter.createFromResource(this,R.array.storage_types, android.R.layout.simple_spinner_item);
         storageArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         storage.setAdapter(storageArrayAdapter);
 
+        storage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String storagetype = storage.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
-    public void addListenertoStorageSpinner(){
+    private void listItemLongClick(){
 
+        ListView listView = (ListView) findViewById(R.id.list);
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                dbHandler.deleteRow(id);
+                showList();
+                return false;
+            }
+        });
+
+    }
+
+    public void shoppingButtonClicked(View view){
+
+        Intent intent = new Intent(this,ShoppingListActivity.class);
+        startActivity(intent);
+
+    }
+    public void mealsButtonClicked (View view){
+
+        Intent intent = new Intent(this,MealsListActivity.class);
+        startActivity(intent);
     }
 
 }

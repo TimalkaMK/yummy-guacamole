@@ -11,30 +11,46 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyDBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 12;
     private static final String DATABASE_NAME = "yummyguac.db" ;
+
     public static final String TABLE_PRODUCE = "produce";
-    public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_PRODUCENAME = "producename";
+    public static final String KEY_ROWID = "_id";
+    public static final String KEY_PRODUCENAME = "producename";
+    public static final String KEY_STORAGETYPE = "storagetype";
+
+    public static final String TABLE_MEALS = "meals";
+    public static final String KEY_ROWID2 = "_id";
+    public static final String KEY_MEALNAME = "mealname";
+    public static final String KEY_MEALTYPE = "mealtype";
 
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context,DATABASE_NAME, factory, DATABASE_VERSION);
+        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String query = "CREATE TABLE " + TABLE_PRODUCE + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_PRODUCENAME + " TEXT " + ");" ;
+        String query = "CREATE TABLE " + TABLE_PRODUCE + " (" +
+                KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                KEY_PRODUCENAME + " TEXT NOT NULL, " +
+                KEY_STORAGETYPE + " TEXT NOT NULL);";
+        String query2 = "CREATE TABLE " + TABLE_MEALS + " (" +
+                KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                KEY_MEALNAME + " TEXT NOT NULL, " +
+                KEY_MEALTYPE + " TEXT NOT NULL);";
 
         db.execSQL(query);
+        db.execSQL(query2);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEALS);
         onCreate(db);
     }
 
@@ -43,7 +59,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(COLUMN_PRODUCENAME, producelist.get_producename());
+        contentValues.put(KEY_PRODUCENAME, producelist.get_producename());
+        contentValues.put(KEY_STORAGETYPE, producelist.get_storagetype());
 
         SQLiteDatabase db = getWritableDatabase();
 
@@ -52,17 +69,40 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void  addMeal(MealList meallist){
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(KEY_MEALNAME, meallist.get_mealName());
+        contentValues.put(KEY_MEALTYPE, meallist.get_mealType());
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.insert(TABLE_MEALS, null, contentValues);
+
+        db.close();
+
+    }
+
+    public boolean deleteRow(long id){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        String where =  KEY_ROWID + "=" + id;
+
+        return db.delete(TABLE_PRODUCE,where,null) != 0;
+    }
+
     // print out the database as string
     public Cursor showProduceList(){
 
         SQLiteDatabase db = getWritableDatabase();
 
-        String query = "SELECT * FROM " + TABLE_PRODUCE + " WHERE 1";
+        String[] columns = new String[]{KEY_ROWID,KEY_PRODUCENAME,KEY_STORAGETYPE};
 
         //POINTER
-        Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = db.query(TABLE_PRODUCE,columns,null,null,null,null,null);
 
-        //extract the product name from table and puts into produces string with new line
         if (cursor != null){
                 cursor.moveToFirst();
         }
@@ -70,4 +110,30 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         return cursor;
     }
+
+    public Cursor showMealsList(){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        //POINTER
+        Cursor cursor = db.rawQuery("SELECT " + KEY_ROWID2 + " AS _id," + KEY_MEALNAME + "," + KEY_MEALTYPE + " FROM " + TABLE_MEALS, null);
+
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+        db.close();
+
+        return cursor;
+    }
+
+    public boolean deleteRow2 (long id){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        String where =  KEY_ROWID2 + "=" + id;
+
+        return db.delete(TABLE_MEALS,where,null) != 0;
+    }
+
+
 }

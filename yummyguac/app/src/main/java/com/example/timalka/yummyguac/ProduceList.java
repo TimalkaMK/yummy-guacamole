@@ -8,18 +8,20 @@ import android.os.Bundle;
  */
 public class ProduceList {
 
-    private int _id;
+    private long _id;
 
     private String _producename;
+    private String _storagetype;
 
     public ProduceList(){
     }
 
-    public ProduceList(String _producename) {
+    public ProduceList(String _producename, String _storagetype) {
         this._producename = _producename;
+        this._storagetype = _storagetype;
     }
 
-    public int get_id() {
+    public long get_id() {
         return _id;
     }
 
@@ -27,11 +29,15 @@ public class ProduceList {
         return _producename;
     }
 
-    public void set_id(int _id) {
+    public String get_storagetype() { return _storagetype; }
+
+    public void set_id(long _id) {
         this._id = _id;
     }
 
     public void set_producename(String _producename) {
         this._producename = _producename;
     }
+
+    public void set_storagetype(String _storagetype) { this._storagetype = _storagetype; }
 }

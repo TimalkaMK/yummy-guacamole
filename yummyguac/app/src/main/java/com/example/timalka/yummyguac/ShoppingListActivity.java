@@ -14,4 +14,6 @@ public class ShoppingListActivity extends Activity {
 
         setContentView(R.layout.activity_shoppinglist);
     }
+
+    //populate shopping list view
 }

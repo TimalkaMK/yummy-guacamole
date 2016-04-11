@@ -9,4 +9,38 @@
         android:text="Meals list"
         android:textSize="16sp"/>
 
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:id="@+id/meallist"></ListView>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="400dp">
+
+        <Spinner
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/mealtype"></Spinner>
+
+        <EditText
+            android:layout_width="290dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/addmeals"
+            android:layout_below="@+id/mealtype"/>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:text="Add"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/addmeals"
+            android:id="@+id/add"
+            android:clickable="true"
+            android:onClick="addButtonClicked" />
+
+    </RelativeLayout>
+
 </LinearLayout>
