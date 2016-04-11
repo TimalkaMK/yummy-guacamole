@@ -17,3 +17,4 @@ make a spinner with storage types and make the colour of items change that stora
 percentage spinner -> used to decrement value when used for a meal , remains stagnant otherwise 
 
 created drop down spinner for storage spinner , need to customise and connect with db
+

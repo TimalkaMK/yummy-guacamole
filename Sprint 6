@@ -1,0 +1,30 @@
+
+Realised I might have to change the entire db to a more complex version - eurgh! DONE :D
+- added storage type to database and listview
+
+Able to delete items in the produce list with a long click: https://www.youtube.com/watch?v=F6ta2sOUjpI
+
+Found out that its logical to decide on storage type first before typing out the produce name so changed the UI 
+so that spinner is above the edittext view.
+
+Created a new meals class, modified dbhandler to include meals table, created a new xml file for list item layout.
+meallist is not populating :( , error message fixed! 
+http://stackoverflow.com/questions/16382416/caused-by-java-lang-illegalargumentexception-column-id-does-not-exist
+
+able to populate meal list view :D
+able to delete list item with a long click.
+
+
+Manipulate the calendar
+
+generate a shopping list according to meals planned and grocery's in kitchen.
+
+
+1. - *make meals list items clickable*
+2. add ingredients to the list - onclick item. - * link the ingredients with the produce list eesh!* :S
+3. select dates to plan meal
+4. plan meal according to date 
+5. populate shopping list with missing ingredients.
+
+Newboston tutorial 112 SQLite database
+
