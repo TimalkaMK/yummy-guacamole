@@ -1,0 +1,38 @@
+db version 24
+
+Realised I might have to change the entire db to a more complex version - eurgh! DONE :D
+- added storage type to database and listview : Newboston tutorial 112 SQLite database
+
+Able to delete items in the produce list with a long click: https://www.youtube.com/watch?v=F6ta2sOUjpI
+
+Found out that its logical to decide on storage type first before typing out the produce name so changed the UI 
+so that spinner is above the edittext view.
+
+Created a new meals class, modified dbhandler to include meals table, created a new xml file for list item layout.
+meallist is not populating :( , error message fixed! 
+http://stackoverflow.com/questions/16382416/caused-by-java-lang-illegalargumentexception-column-id-does-not-exist
+
+able to populate meal list view :D
+able to delete list item with a long click.
+
+add ingredients to the list - onclick item. - * link the ingredients with the produce list eesh!* :S
+used the textview of the meallist to open the ingredients list - new table in database with associate meals to
+connect the meals with ingredients.
+
+http://www.101apps.co.za/index.php/articles/passing-data-between-activities.html - pass meal name from meallistactivity
+to ingredientslistactivity using intent.putextra();
+
+list view in ingredients list is populating but saving previous meals ingredients :/ need to make sure list view 
+populates with the ingredients for each meal. at the mo populating big list of ingredients from different meals :S
+- added a simple where statement in query :D
+
+Able to delete an item on the ingredients list.
+
+Long click sorted out by setting true in get view method.
+
+Adjusting the UI so more user friendly - unable to see what I type when entering list items so put above of list.
+
+
+
+
+
