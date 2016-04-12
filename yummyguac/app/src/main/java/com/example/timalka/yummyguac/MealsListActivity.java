@@ -1,15 +1,19 @@
 package com.example.timalka.yummyguac;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by timalka on 25/11/15.
@@ -73,7 +77,24 @@ public class MealsListActivity extends Activity {
         int[] toViewItem = new int[] {R.id.mealname,R.id.mealType};
 
        //adapting the data to the listview
-        final SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,R.layout.list2,items,fromMealName,toViewItem,0);
+        final SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,R.layout.list2,items,fromMealName,toViewItem,0) {
+            @Override
+            public View getView(final int position, View convertView, ViewGroup parent) {
+                View mealItemView = super.getView(position, convertView, parent);
+                final String mealName = ((TextView) mealItemView.findViewById(R.id.mealname)).getText().toString();
+                //when mealname view is clicked open the ingredients list with populate listview
+                mealItemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onMealItemClick(mealName);
+                    }
+                });
+
+                mealItemView.setLongClickable(true);
+
+                return mealItemView;
+            }
+        };
         ListView listView2 = (ListView) findViewById(R.id.meallist);
         listView2.setAdapter(cursorAdapter);
 
@@ -86,12 +107,13 @@ public class MealsListActivity extends Activity {
 
         ListView listView = (ListView) findViewById(R.id.meallist);
 
+        listView.setLongClickable(true);
+
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
                 // remove the item from database and listview
-
                 dbHandler.deleteRow2(id);
                 showList();
                 return false;
@@ -100,17 +122,13 @@ public class MealsListActivity extends Activity {
 
     }
 
-    private void listItemClick(){
+    //open ingredients list activity
+    public void onMealItemClick(String mealName) {
+        Intent intent = new Intent(this,IngredientsListActivity.class);
+        // pass the meal name to ingredients list activity
+        intent.putExtra("mealname", mealName);
+        startActivity(intent);
 
-        ListView listView = (ListView) findViewById(R.id.meallist);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                // open the ingredients list
-            }
-        });
 
     }
 

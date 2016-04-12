@@ -3,20 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Meals list"
-        android:textSize="16sp"/>
-
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="300dp"
-        android:id="@+id/meallist"></ListView>
-
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="400dp">
+        android:layout_height="200dp">
 
         <Spinner
             android:layout_width="150dp"
@@ -42,5 +31,12 @@
             android:onClick="addButtonClicked" />
 
     </RelativeLayout>
+
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:id="@+id/meallist"></ListView>
+
 
 </LinearLayout>

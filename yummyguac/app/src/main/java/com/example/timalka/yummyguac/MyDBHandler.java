@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyDBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 24;
     private static final String DATABASE_NAME = "yummyguac.db" ;
 
     public static final String TABLE_PRODUCE = "produce";
@@ -23,6 +23,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String KEY_ROWID2 = "_id";
     public static final String KEY_MEALNAME = "mealname";
     public static final String KEY_MEALTYPE = "mealtype";
+
+    public static final String TABLE_INGREDIENTS = "ingredients";
+    public static final String KEY_ROWID3 = "_id";
+    public static final String KEY_ASSOCIATED_MEAL = "associatedmeal";
+    public static final String KEY_INGREDIENTNAME = "ingredientname";
 
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -37,12 +42,18 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 KEY_PRODUCENAME + " TEXT NOT NULL, " +
                 KEY_STORAGETYPE + " TEXT NOT NULL);";
         String query2 = "CREATE TABLE " + TABLE_MEALS + " (" +
-                KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                KEY_ROWID2 + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 KEY_MEALNAME + " TEXT NOT NULL, " +
                 KEY_MEALTYPE + " TEXT NOT NULL);";
 
+        String query3 = "CREATE TABLE " + TABLE_INGREDIENTS + " (" +
+                KEY_ROWID3 + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                KEY_ASSOCIATED_MEAL + " TEXT NOT NULL, " +
+                KEY_INGREDIENTNAME + " TEXT NOT NULL);";
+
         db.execSQL(query);
         db.execSQL(query2);
+        db.execSQL(query3);
 
     }
 
@@ -51,6 +62,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEALS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENTS);
         onCreate(db);
     }
 
@@ -82,6 +94,20 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         db.close();
 
+    }
+
+    public void addIngredients (IngredientsList ingredientsList){
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(KEY_INGREDIENTNAME, ingredientsList.get_ingredient());
+        contentValues.put(KEY_ASSOCIATED_MEAL, ingredientsList.get_associatemeal());
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.insert(TABLE_INGREDIENTS, null, contentValues);
+
+        db.close();
     }
 
     public boolean deleteRow(long id){
@@ -126,6 +152,23 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor showIngredientsList(String mealname){
+
+        SQLiteDatabase db = getWritableDatabase();
+        //"SELECT * FROM table_a a INNER JOIN table_b b ON a.id=b.other_id WHERE b.property_id=?";
+
+        //retrieve ingredients associated with meals
+        Cursor cursor = db.rawQuery("SELECT " + KEY_ROWID3 + " AS _id," + KEY_INGREDIENTNAME +"," + KEY_ASSOCIATED_MEAL + " FROM "
+                + TABLE_INGREDIENTS + " WHERE " + KEY_ASSOCIATED_MEAL + "='" + mealname + "'", null );
+
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+        db.close();
+
+        return cursor;
+    }
+
     public boolean deleteRow2 (long id){
 
         SQLiteDatabase db = getWritableDatabase();
@@ -135,5 +178,13 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return db.delete(TABLE_MEALS,where,null) != 0;
     }
 
+    public boolean deleteRow3 (long id){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        String where =  KEY_ROWID3 + "=" + id;
+
+        return db.delete(TABLE_INGREDIENTS,where,null) != 0;
+    }
 
 }

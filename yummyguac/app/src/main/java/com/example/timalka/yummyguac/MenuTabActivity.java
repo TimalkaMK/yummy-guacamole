@@ -102,11 +102,6 @@ public class MenuTabActivity extends AppCompatActivity
            // Intent openProduce = new Intent(this, KitchenActivity.class);
            // startActivity(openProduce);
 
-        } else if (id == R.id.meals) {
-
-            Intent openMeals = new Intent(this, MealsActivity.class);
-            startActivity(openMeals);
-
         } else if (id == R.id.shoppinglist) {
 
             Intent openShoppingList = new Intent(this, ShoppingListActivity.class);

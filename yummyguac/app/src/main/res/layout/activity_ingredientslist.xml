@@ -3,10 +3,34 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingredients list"
-        android:textSize="16sp"/>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="200dp">
+
+        <EditText
+            android:layout_width="290dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/addingredients"/>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:text="Add"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/addingredients"
+            android:id="@+id/include"
+            android:clickable="true"
+            android:onClick="ingredientsAddButtonClicked" />
+
+    </RelativeLayout>
+
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:id="@+id/ingredientslist"></ListView>
+
+
 
 </LinearLayout>
