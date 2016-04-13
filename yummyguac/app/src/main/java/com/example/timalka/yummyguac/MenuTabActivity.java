@@ -1,5 +1,7 @@
 package com.example.timalka.yummyguac;
 
+import android.app.DatePickerDialog;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -18,6 +20,8 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.GridView;
@@ -27,8 +31,11 @@ import android.widget.ScrollView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import java.util.Calendar;
 
 public class MenuTabActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,26 +44,32 @@ public class MenuTabActivity extends AppCompatActivity
     MyDBHandler dbHandler;
     Spinner storage;
     Spinner percentage;
+    CalendarView calendarView;
+    Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_tab);
+        setContentView(R.layout.content_menu_tab);
 
         scrolling();
         //input,output and interacting with database handler
         input = (EditText) findViewById(R.id.input);
-       // storage = (Spinner) findViewById(R.id.storage);
+
        // percentage = (Spinner) findViewById(R.id.percentage);
         dbHandler = new MyDBHandler(this,null,null,1);
 
         storage = (Spinner) findViewById(R.id.storage);
+
+        calendarView = (CalendarView) findViewById(R.id.calendarview);
 
         showList();
 
         listItemLongClick();
 
         createstorageSpinner();
+
+        calendarViewClick();
     }
 
     @Override
@@ -183,16 +196,52 @@ public class MenuTabActivity extends AppCompatActivity
 
     }
 
+    public void calendarViewClick(){
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+
+                Toast.makeText(MenuTabActivity.this, "Date clicked is " + dayOfMonth, Toast.LENGTH_LONG).show();
+                // show planned meals as a list view
+
+            }
+        });
+    }
+
+    // view shopping list
     public void shoppingButtonClicked(View view){
 
         Intent intent = new Intent(this,ShoppingListActivity.class);
         startActivity(intent);
 
     }
+
+    // view meals list and ingredients
     public void mealsButtonClicked (View view){
 
         Intent intent = new Intent(this,MealsListActivity.class);
         startActivity(intent);
     }
 
+
+    // plan meals
+    public void planButtonClicked(View view){
+
+        new DatePickerDialog(MenuTabActivity.this,listener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+
+    }
+
+    // open planning activity when date is selected
+    DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+            Toast.makeText(MenuTabActivity.this,"Day selected is" + dayOfMonth, Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(MenuTabActivity.this,PlanningActivity.class);
+            startActivity(intent);
+
+        }
+    };
 }

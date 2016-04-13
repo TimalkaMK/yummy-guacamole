@@ -1,11 +1,30 @@
+db version 26
 UI: Need to sort out the hide keypad after typing, scrollview 
+
+Changed the layout file target of main activity to remove the top bar.
+
+select dates to plan meal- 
+Implementing a plan button with dialog https://www.youtube.com/watch?v=bkUHeXCX8XM
+and date picker https://www.youtube.com/watch?v=Qx23fC4Wgpw 
+
+Able to open the planning activity after selecting a date on datepicker
+Breakfast spinner is showing list of meal items, small issue was resolved with this after using simplecursor adapter
+on spinner:
+http://stackoverflow.com/questions/3073447/android-text-dropdown-selection-of-spinner-does-not-show/3075557#3075557
+
+Next ... - save button - save the planned meals to planned meals database
+
+
+*Show the planned meals on the calendar with a colour* -> able to click on date to show a list view of planned meals
+http://stackoverflow.com/questions/11949183/calendarview-clickable-android
 
 Manipulate the calendar
 
 generate a shopping list according to meals planned and grocery's in kitchen.
 
 
-3. select dates to plan meal
+
 4. plan meal according to date 
 5. populate shopping list with missing ingredients.
+
 

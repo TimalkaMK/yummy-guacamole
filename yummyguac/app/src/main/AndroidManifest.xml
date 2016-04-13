@@ -24,6 +24,8 @@
             android:label="@string/ingredients_screen"/>
         <activity android:name=".ShoppingListActivity"
             android:label="@string/shopping_list_screen"/>
+        <activity android:name=".PlanningActivity"
+            android:label="@string/planning_screen"/>
 
 
     </application>

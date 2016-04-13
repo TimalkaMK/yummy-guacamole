@@ -41,7 +41,6 @@ public class IngredientsListActivity extends Activity{
     }
 
     public void  ingredientsAddButtonClicked(View view){
-        //Toast.makeText(IngredientsListActivity.this, "The meal name is " + mealname,Toast.LENGTH_LONG).show();
         IngredientsList item = new IngredientsList(addIngredients.getText().toString(),mealname);
         dbHandler.addIngredients(item);
         showList(mealname);

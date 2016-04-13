@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyDBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 24;
+    private static final int DATABASE_VERSION = 26;
     private static final String DATABASE_NAME = "yummyguac.db" ;
 
     public static final String TABLE_PRODUCE = "produce";
@@ -28,6 +28,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String KEY_ROWID3 = "_id";
     public static final String KEY_ASSOCIATED_MEAL = "associatedmeal";
     public static final String KEY_INGREDIENTNAME = "ingredientname";
+
+   /* public static final String TABLE_PLANNEDMEALS = "plannedmeals";
+    public static final String KEY_ROWID4 = "_id";
+    public static final String KEY_PLANNED_MEALTYPE = "plannedmeal";
+    public static final String KEY_PLANNED_MEALNAME = "plannedmealname";
+    public static final String KEY_ASSOCIATED_DATE = "associateddate";*/
 
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -160,6 +166,57 @@ public class MyDBHandler extends SQLiteOpenHelper {
         //retrieve ingredients associated with meals
         Cursor cursor = db.rawQuery("SELECT " + KEY_ROWID3 + " AS _id," + KEY_INGREDIENTNAME +"," + KEY_ASSOCIATED_MEAL + " FROM "
                 + TABLE_INGREDIENTS + " WHERE " + KEY_ASSOCIATED_MEAL + "='" + mealname + "'", null );
+
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+        db.close();
+
+        return cursor;
+    }
+
+    public Cursor showBreakfastMeals(){
+
+        SQLiteDatabase db = getWritableDatabase();
+        //"SELECT * FROM table_a a INNER JOIN table_b b ON a.id=b.other_id WHERE b.property_id=?";
+
+        //retrieve ingredients associated with meals
+        Cursor cursor = db.rawQuery("SELECT " + KEY_ROWID2 + " AS _id," + KEY_MEALNAME +"," + KEY_MEALTYPE + " FROM "
+                + TABLE_MEALS + " WHERE " + KEY_MEALTYPE + "='Breakfast'", null );
+
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+        db.close();
+
+        return cursor;
+    }
+
+    public Cursor showLunchMeals(){
+
+        SQLiteDatabase db = getWritableDatabase();
+        //"SELECT * FROM table_a a INNER JOIN table_b b ON a.id=b.other_id WHERE b.property_id=?";
+
+        //retrieve ingredients associated with meals
+        Cursor cursor = db.rawQuery("SELECT " + KEY_ROWID2 + " AS _id," + KEY_MEALNAME +"," + KEY_MEALTYPE + " FROM "
+                + TABLE_MEALS + " WHERE " + KEY_MEALTYPE + "='Lunch'", null );
+
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+        db.close();
+
+        return cursor;
+    }
+
+    public Cursor showDinnerMeals(){
+
+        SQLiteDatabase db = getWritableDatabase();
+        //"SELECT * FROM table_a a INNER JOIN table_b b ON a.id=b.other_id WHERE b.property_id=?";
+
+        //retrieve ingredients associated with meals
+        Cursor cursor = db.rawQuery("SELECT " + KEY_ROWID2 + " AS _id," + KEY_MEALNAME +"," + KEY_MEALTYPE + " FROM "
+                + TABLE_MEALS + " WHERE " + KEY_MEALTYPE + "='Dinner'", null );
 
         if (cursor != null){
             cursor.moveToFirst();
