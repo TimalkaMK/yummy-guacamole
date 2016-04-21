@@ -17,6 +17,8 @@ Next ... - save button - save the planned meals to planned meals database
 
 *Show the planned meals on the calendar with a colour* -> able to click on date to show a list view of planned meals
 http://stackoverflow.com/questions/11949183/calendarview-clickable-android
+http://developer.android.com/reference/java/text/SimpleDateFormat.html
+http://stackoverflow.com/questions/22461258/how-to-get-date-from-calendarview-oncreate-with-a-specific-format-e-g-dd-mm
 
 Manipulate the calendar
 
@@ -27,4 +29,21 @@ generate a shopping list according to meals planned and grocery's in kitchen.
 4. plan meal according to date 
 5. populate shopping list with missing ingredients.
 
+Junit
+white box, black box, algebraic testing 
+
+Quantities
+editing the list name
+UI 
+
+
+have to change the query from 
+SELECT ingredientName
+FROM ingredient
+INNER JOIN lkMealIngredient on ingredient.ingredientId = lkMealIngredient.ingredientId
+INNER JOIN Meal on Meal.mealId = lkMealIngredient.mealId
+WHERE Meal.mealName = "SPAGHETTI" 
+
+Ingredients not showing on list , the query might be wrong :S
+http://javarevisited.blogspot.co.uk/2012/11/how-to-join-three-tables-in-sql-query-mysql-sqlserver.html
 
